@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <p class="mat-title">El muro de Angular Bogotá</p>
+  <div fxFlex></div>
+  <button mat-button
+          color="warn"
+          *ngIf="auth.user$ | async; else noUser"
+          (click)="auth.logout()">Logout</button>
+  <ng-template #noUser>
+    <button mat-raised-button
+            (click)="auth.loginWithGoogle()">Login</button>
+  </ng-template>
+</mat-toolbar>
+
+<div class="container">
+
+  <mat-card *ngIf="auth.user$ | async as user">
+    <p class="mat-title">Bienvenida/o {{ user.displayName }}</p>
+    <p class="mat-body-1">Escribe lo que quieres compartir</p>
+    <form fxLayout="column"
+          [formGroup]="addPostForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Título</mat-label>
+        <input matInput
+               formControlName="title">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Mensaje</mat-label>
+        <textarea matInput
+                  placeholder="Deja tu mensaje en el muro"
+                  formControlName="description"></textarea>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button
+            color="accent"
+            [disabled]="!addPostForm.valid"
+            (click)="submitForm(user.uid)">AGREGAR</button>
+  </mat-card>
+
+  <div *ngFor="let post of posts$ | async"
+       class="m-4">
+    <mat-card>
+      <p class="mat-body-2"> {{post.title}} </p>
+      <p class="mat-body-1"> {{post.description}} </p>
+      <p class="mat-caption"> Por: {{post.uid}} </p>
+      <p class="mat-body-1"> {{post.likes}} Likes </p>
+      <mat-card-footer fxLayout="row"
+                       fxLayoutAlign="space-between start"
+                       style="margin: 2px;">
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

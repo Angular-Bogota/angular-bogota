@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "target": "firebase-wall",
+    "public": "dist/apps/firebase-wall",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "firestore": {
+    "rules": "y",
+    "indexes": "y"
+  }
+}

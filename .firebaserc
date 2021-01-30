@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "fir-wall-eaf5b"
+  },
+  "targets": {
+    "fir-wall-eaf5b": {
+      "hosting": {
+        "firebase-wall": [
+          "fir-wall-eaf5b"
+        ]
+      }
+    }
+  }
+}
